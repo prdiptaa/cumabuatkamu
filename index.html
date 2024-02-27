@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cuma gini aja kok</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Shadows+Into+Light&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            /* Warna teks utama */
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+        }
+
+        .container {
+            padding-top: 30px;
+            /* background: red; */
+            height: 100vh;
+            max-width: 100%;
+            /* padding: 20px; */
+            text-align: center;
+            transition: background-image 5s ease-in-out;
+            /* Transisi untuk latar belakang */
+            background-image: none;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Latar belakang awal */
+            transition: opacity 1s ease-in-out, background-image 1s ease-in-out;
+        }
+
+
+        .container.show {
+            opacity: 1;
+            /* Ubah opacity menjadi 1 saat class .show ditambahkan */
+        }
+
+        #header {
+            margin-bottom: 30px;
+        }
+
+        #header h1 {
+            font-family: "Shadows Into Light", cursive;
+            font-size: 39px;
+            font-weight: 700;
+            color: #fff200;
+            /* Warna teks utama */
+        }
+
+        #header p {
+            color: #777;
+            /* Warna teks sekunder */
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #fff200;
+            /* Warna tombol */
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c6bc03;
+            /* Warna hover tombol */
+        }
+
+        .text-container p {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInText 3s forwards;
+            font-size: 24px;
+            color: rgb(43, 43, 43);
+            font-weight: 500;
+            font-family: "Pacifico", cursive;
+            text-shadow: 0px 1px 10px #fff200;
+            z-index: 99;
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .penjor {
+            background-image: url('asset/penjor.jpeg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            /* Mulai dengan opacity 0 */
+            transition: opacity 1s ease-in-out;
+            /* Transisi untuk opacity */
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div id="header">
+            <h1>good morning too</h1>
+
+        </div>
+        <form id="inputForm">
+            <label for="username">Masukin nama dulu lah</label>
+            <input type="text" id="username" name="username" placeholder="Masukkan nama panggilan kamu yaa" required>
+            <button type="submit" id="okButton">udahh</button>
+        </form>
+        <div id="greeting" class="hidden">
+            <div class="text-container">
+                <p id="text"></p>
+                <p id="credit"></p>
+            </div>
+        </div>
+    </div>
+    <audio id="baliMusic">
+        <source src="backsong2" type="audio/mpeg">
+
+    </audio>
+    <script>
+        document.getElementById('inputForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var username = document.getElementById('username').value;
+            showGreeting(username);
+            hideForm();
+            playBaliMusic();
+            changeBackground();
+            hideHeader()
+        });
+
+        function showGreeting(username) {
+            var greetingDiv = document.getElementById('greeting');
+            var text = document.getElementById('text');
+
+            greetingDiv.classList.remove('hidden');
+
+            var message = "Rahajeng hari raya Galungan yaa " + username + "! udah cuma ini aja kok ;).";
+            var index = 0;
+            var interval = setInterval(function () {
+                if (index < message.length) {
+                    text.textContent += message.charAt(index);
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+        function hideForm() {
+            var form = document.getElementById('inputForm');
+            form.style.display = "none";
+            setTimeout(function () {
+                form.classList.add('hidden');
+            }, 500);
+        }
+
+        function playBaliMusic() {
+            var audio = document.getElementById('baliMusic');
+            audio.play();
+        }
+
+        function changeBackground() {
+            var container = document.getElementById('container');
+            var penjor = document.createElement('div'); // Buat elemen div baru untuk gambar penjor
+            penjor.classList.add('penjor'); // Tambahkan kelas 'penjor' pada elemen div
+            container.appendChild(penjor); // Tambahkan elemen penjor ke dalam container
+
+            // Tambahkan efek fade-in pada gambar penjor
+            setTimeout(function () {
+                penjor.style.opacity = 1;
+            }, 100);
+        }
+
+
+        function hideHeader() {
+            var header = document.getElementById('header');
+            header.style.opacity = 0;
+        }
+    </script>
+</body>
+
+</html>
