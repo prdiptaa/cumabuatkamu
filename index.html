@@ -126,6 +126,25 @@
             /* Transisi untuk opacity */
             z-index: -1;
         }
+
+        #anotherButton {
+            opacity: 0;
+            /* Mulai dengan opacity 0 */
+            transition: opacity 1s ease-in-out;
+            border: 1px solid #000;
+            background: #0000004c;
+            color: #fff200;
+            /* Transisi untuk opacity */
+        }
+
+        #anotherButton:hover{
+            background: #000000b3;
+        }
+
+        #anotherButton.visible {
+            opacity: 1;
+            /* Ubah opacity menjadi 1 saat class 'visible' ditambahkan */
+        }
     </style>
 </head>
 
@@ -145,6 +164,7 @@
                 <p id="text"></p>
                 <p id="credit"></p>
             </div>
+            <button id="anotherButton" class="hidden visible">Klik disini</button>
         </div>
     </div>
     <audio id="baliMusic">
@@ -177,6 +197,7 @@
                     index++;
                 } else {
                     clearInterval(interval);
+                    showAnotherButton();
                 }
             }, 100);
         }
@@ -211,6 +232,16 @@
             var header = document.getElementById('header');
             header.style.opacity = 0;
         }
+
+         function showAnotherButton() {
+            var anotherButton = document.getElementById('anotherButton');
+            anotherButton.classList.remove('hidden');
+        }
+        document.getElementById('anotherButton').addEventListener('click', function () {
+                // Mengarahkan pengguna ke profil Instagram
+                alert("jangan lupa kritik dan sarannya");
+                window.location.href = 'https://www.instagram.com/pradiptaaee/';
+            });
     </script>
 </body>
 
